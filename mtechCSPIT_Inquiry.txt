@@ -1,0 +1,183 @@
+import json
+import time
+import os
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+def response(intent, slots, slotToElicit, content):
+    return {
+        "dialogAction": {
+            'type': 'ElicitSlot',
+            'message': {
+                'contentType': 'PlainText',
+                'content': content
+            },
+            'slots': slots,
+            'slotToElicit': slotToElicit,
+            'intentName': intent
+        }
+    }
+
+def mtechCE_CSPIT(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Computer Engineering is : Seat: 36')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Computer Engineering is : 1,59,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Computer Engineering is : 2 Years')
+
+def mtechCSE_CSPIT(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Computer Science and Engineering is : Seat: 18')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Computer Science and Engineering is : 1,59,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Computer Science and Engineering is : 2 Years')
+    
+def mtechELEPOWERSYS_CSPIT(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Electrical Power System is : Seat: 18')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Electrical Power System is : 1,59,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Electrical Power System is : 2 Years')
+
+def mtechPOWERELE_CSPIT(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Power Electronics is : Seat: 18')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Power Electronics is : 1,59,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Power Electronics is : 2 Years')
+        
+def mtechICT_CSPIT(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Information Communication Technology is : Seat: 18')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Information Communication Technology is : 1,59,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Information Communication Technology is : 2 Years')
+        
+def mtechSTRUENG_CSPIT(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Structural Engineering is : Seat: 18')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Structural Engineering is : 1,59,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Structural Engineering is : 2 Years')
+
+def mtechTHERMAL_CSPIT(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Thermal Engineering is : Seat: 18')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Thermal Engineering is : 1,59,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Thermal Engineering is : 2 Years')
+        
+def mtechVLSI_CSPIT(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Embedded System and VLSI Design is : Seat: 18')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Embedded System and VLSI Design is : 1,59,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Embedded System and VLSI Design is : 2 Years')
+        
+def mtechADVMANU_CSPIT(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Advanced Manufacturing Technology is : Seat: 18')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Advanced Manufacturing Technology is : 1,59,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Advanced Manufacturing Technology is : 2 Years')
+        
+def mtechCADM_CSPIT(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Computer Aided Design and Manufacturing is : Seat: 18')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Computer Aided Design and Manufacturing is : 1,59,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Mtech Computer Aided Design and Manufacturing is : 2 Years')
+        
+# --- Intents ---
+
+def dispatch(intent_request):
+    logger.debug(
+        'dispatch userId={}, intentName={}'.format(intent_request['userId'], intent_request['currentIntent']['name']))
+
+    intent_name = intent_request['currentIntent']['name']
+
+    # Dispatch to your bot's intent handlers
+    if intent_name == 'mtechCE_CSPIT':
+        return mtechCE_CSPIT(intent_request)
+    elif intent_name == 'mtechCSE_CSPIT':
+        return mtechCSE_CSPIT(intent_request)
+    elif intent_name == 'mtechELEPOWERSYS_CSPIT':
+        return mtechELEPOWERSYS_CSPIT(intent_request)
+    elif intent_name == 'mtechPOWERELE_CSPIT':
+        return mtechPOWERELE_CSPIT(intent_request)
+    elif intent_name == 'mtechICT_CSPIT':
+        return mtechICT_CSPIT(intent_request)
+    elif intent_name == 'mtechSTRUENG_CSPIT':
+        return mtechSTRUENG_CSPIT(intent_request)
+    elif intent_name == 'mtechTHERMAL_CSPIT':
+        return mtechTHERMAL_CSPIT(intent_request)
+    elif intent_name == 'mtechVLSI_CSPIT':
+        return mtechVLSI_CSPIT(intent_request)
+    elif intent_name == 'mtechADVMANU_CSPIT':
+        return mtechADVMANU_CSPIT(intent_request)
+    elif intent_name == 'mtechCADM_CSPIT':
+        return mtechCADM_CSPIT(intent_request)
+    else:
+        raise Exception('Intent with name ' + intent_name + ' not supported')
+
+
+# --- Main handler ---
+
+def lambda_handler(event, context):
+    os.environ['TZ'] = 'America/New_York'
+    time.tzset()
+    logger.debug('event.bot.name={}'.format(event['bot']['name']))
+
+    return dispatch(event)

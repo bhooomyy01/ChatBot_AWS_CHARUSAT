@@ -1,0 +1,85 @@
+import json
+import time
+import os
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+def response(intent, slots, slotToElicit, content):
+    return {
+        "dialogAction": {
+            'type': 'ElicitSlot',
+            'message': {
+                'contentType': 'PlainText',
+                'content': content
+            },
+            'slots': slots,
+            'slotToElicit': slotToElicit,
+            'intentName': intent
+        }
+    }
+
+def btechCE_DEPSTAR(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Btech Computer Engineering is : State Seat: 90, Management Seat: 12, NRI Seat: 18')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Btech Computer Engineering is : 98,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Btech Computer Engineering is : 4 Years')
+
+def btechIT_DEPSTAR(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Btech Information Technology is : State Seat: 45, Management Seat: 6, NRI Seat: 9')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Btech Information Technology is : 98,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Btech Information Technology is : 4 Years')
+
+def btechCSE_DEPSTAR(intent_request):
+    intent = intent_request['currentIntent']['name']
+    slots = intent_request['currentIntent']['slots']
+    Inquiry = slots['Inquiry']
+    
+    if(Inquiry == 'intake'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Btech Computer Science and Engineering is : State Seat: 90, Management Seat: 24, NRI Seat: 18')
+    elif(Inquiry == 'fees'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Btech Computer Science and Engineering is : 98,000 rupees')
+    elif(Inquiry == 'course duration'):
+        return response(intent, slots, 'Inquiry', Inquiry + ' in Btech Computer Science and Engineering is : 4 Years')
+
+# --- Intents ---
+
+def dispatch(intent_request):
+    logger.debug(
+        'dispatch userId={}, intentName={}'.format(intent_request['userId'], intent_request['currentIntent']['name']))
+
+    intent_name = intent_request['currentIntent']['name']
+
+    # Dispatch to your bot's intent handlers
+    if intent_name == 'btechCE_DEPSTAR':
+        return btechCE_DEPSTAR(intent_request)
+    elif intent_name == 'btechIT_DEPSTAR':
+        return btechIT_DEPSTAR(intent_request)
+    elif intent_name == 'btechCSE_DEPSTAR':
+        return btechCSE_DEPSTAR(intent_request)
+    else:
+        raise Exception('Intent with name ' + intent_name + ' not supported')
+
+
+# --- Main handler ---
+
+def lambda_handler(event, context):
+    os.environ['TZ'] = 'America/New_York'
+    time.tzset()
+    logger.debug('event.bot.name={}'.format(event['bot']['name']))
+
+    return dispatch(event)

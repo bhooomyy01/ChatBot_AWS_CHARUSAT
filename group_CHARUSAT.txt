@@ -1,0 +1,93 @@
+import json
+import time
+import os
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+def group_a():
+    title = 'Group A'
+    subtitle = 'Explore details regading programs avaible for Group A students'
+    #imgurl = 'https://www.sd308.org/cms/lib/IL01906463/Centricity/Domain/1053/STEM%20Logo.png'
+    response = {
+        "dialogAction": {
+            'type': 'Close',
+            'fulfillmentState': 'Fulfilled',
+            'message': {
+                'contentType': 'PlainText',
+                'content': 'Which program?(Under graduate or Post graduate) Please select from below'
+            },
+            'responseCard': {
+                'version': 1,
+                'contentType': 'application/vnd.amazonaws.card.generic',
+                'genericAttachments': [
+                    {
+                        "title": 'title',
+                        "subTitle": 'subtitle',
+                        "buttons": [
+                        {
+                          "text": "B. Tech",
+                          "value": "btech"
+                        },
+                        {
+                          "text": "M. Tech",
+                          "value": "mtech"
+                        }
+                      ]
+                    }]
+                }
+            }
+        }
+    
+    return response
+
+def group_b():
+    response = {
+        "dialogAction": {
+            'type': 'Close',
+            'fulfillmentState': 'Fulfilled',
+            'message': {
+                'contentType': 'PlainText',
+                'content': 'Currently not availble.'
+            }
+        }
+    }
+    
+    return response
+
+
+    return response
+
+def group_charusat(intent_request):
+    slots = intent_request['currentIntent']['slots']
+    group = slots['Group']
+    
+    if group == 'group a':
+        return group_a()
+    elif group == 'group b':
+        return group_b()
+    
+# --- Intents ---
+
+def dispatch(intent_request):
+    logger.debug(
+        'dispatch userId={}, intentName={}'.format(intent_request['userId'], intent_request['currentIntent']['name']))
+
+    intent_name = intent_request['currentIntent']['name']
+
+    # Dispatch to your bot's intent handlers
+    if intent_name == 'admissionCHARUSAT':
+        return group_charusat(intent_request)
+    else:
+        raise Exception('Intent with name ' + intent_name + ' not supported')
+
+
+# --- Main handler ---
+
+def lambda_handler(event, context):
+    os.environ['TZ'] = 'America/New_York'
+    time.tzset()
+    logger.debug('event.bot.name={}'.format(event['bot']['name']))
+
+    return dispatch(event)
